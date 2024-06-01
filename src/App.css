@@ -36,3 +36,66 @@
     transform: rotate(360deg);
   }
 }
+
+
+.custom-dropdown {
+    position: relative; /* Needed for proper positioning of elements */
+  }
+  
+  .selected-value {
+    display: inline-block;
+    padding: 5px 15px 5px 30px; /* Increased right padding to accommodate the arrow */
+    border: 1px solid #ccc; /* Optional border */
+    border-radius: 4px;
+    cursor: pointer; /* Change cursor to pointer on hover */
+    position: relative; /* Needed for positioning the arrow icon */
+    width: fit-content;
+    background-color: #d1e8de; /* Light green background color */
+    color: black; /* Black text color */
+  }
+  
+  .selected-value::after {
+    content: "\25BE"; /* Unicode arrow down icon code */
+    font-family: Arial, sans-serif; /* Use a generic font */
+    font-size: 12px;
+    position: absolute;
+    right: 5px; /* Position the arrow on the right */
+    top: 50%; /* Center the arrow vertically */
+    transform: translateY(-50%); /* Center the arrow vertically */
+    pointer-events: none; /* Disable pointer events on the icon */
+    color: black; /* Changed to black for black arrow icon */
+  }
+  
+  .dropdown-toggle {
+    /* Removed to hide the toggle button */
+    display: none;
+  }
+  
+  .dropdown-list {
+    position: absolute;
+    top: 100%; /* Position below the selected-value */
+    left: 0;
+    background-color: #d1e8de; /* Light green background color */
+    color: black; /* Black text color */
+    border: 1px solid #ccc; /* Optional border */
+    border-radius: 4px;
+    padding: 5px;
+    list-style: none;
+    width: 170px;  /* Adjust as needed */
+    /* Adjust horizontal positioning if needed */
+    /* For example, to align the dropdown list to the right edge: */
+    /* left: auto; */
+    /* right: 0; */
+  }
+  
+  .dropdown-list li {
+    text-align: left; /* Align text to the left edge */
+    padding: 5px;
+    cursor: pointer; /* Change cursor to pointer on hover */
+    color: black; /* Black text color (redundant with list style) */
+  }
+  
+  .dropdown-list li:hover {
+    background-color: #eee; /* Change background color on hover */
+  }
+  
