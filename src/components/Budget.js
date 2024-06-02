@@ -11,11 +11,11 @@ const Budget = () => {
 
     const handleBudgetChange = (event) => {
         const value = event.target.value
-        // if(value > remaining) {
-        //     alert("The value cannot exceed remaining funds  £"+remaining);
-        //     // setNewBudget(budget);
-        //     return;
-        // }
+        if(value > remaining) {
+            alert("The value cannot exceed remaining funds  £"+remaining);
+            // setNewBudget(budget);
+            return;
+        }
 
         if(value < totalExpenses) {
             alert(`You cannot reduce the budget value lower than the spending ${currency}`+totalExpenses);
