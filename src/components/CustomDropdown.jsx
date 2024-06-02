@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import '../App.css'; // Import the CSS file
-
-const currencies = ['$ Dollar', '€ Euro', '¥ Yen', '₹ Rupee']; // Desired format
+import { AppContext } from '../context/AppContext';
 
 const CustomDropdown = () => {
+  const map = {
+    "$": '$ Dollar',
+    "£": '£ Pound',
+    "€": '€ Euro',
+    "₹": '₹ Ruppee',
+  }
+
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(currencies[0]); // Set default selected value
+  const [selectedValue, setSelectedValue] = useState(Object.values(map)[1]); // Set default selected value
+
+  const { dispatch, currency } = useContext(AppContext);
+
+  const changeCurrency = (val)=>{
+    dispatch({
+      type: 'CHG_CURRENCY',
+      payload: val,
+    })
+  }
 
   const handleClickOutside = (event) => {
     if (!event.target.closest('.custom-dropdown')) {
@@ -17,8 +32,9 @@ const CustomDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleOptionClick = (event) => {
-    setSelectedValue(event.target.textContent);
+  const handleOptionClick = (value, text) => {
+    setSelectedValue(text);
+    changeCurrency(value)
     setIsOpen(false);
   };
 
@@ -29,9 +45,9 @@ const CustomDropdown = () => {
       </span>
       {isOpen && (
         <ul className="dropdown-list">
-          {currencies.map((option) => (
-            <li key={option} onClick={handleOptionClick}>
-              {option}
+          {Object.entries(map).map(([value, text]) => (
+            <li key={value} onClick={() => handleOptionClick(value, text)}>
+              {text}
             </li>
           ))}
         </ul>
